@@ -7,9 +7,9 @@ The DDPG implementation was used to solve the [Reacher](https://github.com/Unity
 
 ### Learning Algorithm
 
-For the solution we have implemented the Deep Deterministic Policy Gradients (DDPG), DDPG is an Actor-Critic algorithm that make use of two neural networks, one for the Actor and one for the Critic. These networks compute action predictions for the current state and generate a temporal-difference (TD) error signal at each time step. The input of the Actor network is the current state, and using a policy function provides the output, a single real value representing a chosen action (Deterministic Policy). The other neural network the Critic, is used to criticize the actions made by the Actor to the temporal-difference (TD) error.
+For the solution we have implemented the Deep Deterministic Policy Gradients (DDPG), DDPG is an Actor-Critic algorithm that make use of two neural networks, one for the Actor and one for the Critic. These networks compute action predictions for the current state and generate a temporal-difference (TD) error signal at each time step. The input of the Actor network is the current state, and using a policy function that provides the output,  as a single real value representing a chosen action (Deterministic Policy). The other neural network the Critic, is used to criticize the actions made by the Actor by using the temporal-difference (TD) error.
 
-But, deterministic policy gradient might not explore the full state and action space, to mitigate this challenge a number of techniques are applied to this implementation including Soft Target Update[7] through twin local / target network, a Replay Buffer, and adding noise for action explorations.
+But, deterministic policy gradient might not explore the full state and action space, to mitigate this challenge a number of techniques are applied to this implementation, including Soft Target Update[7] through twin local / target network, a replay buffer, and adding noise for action explorations.
 
 #### Replay Buffer
 Replay Buffer is where it allows the DDPG agent to learn on both the current experience and past experiences, by sampling experiences from the Replay Buffer across a set of unrelated experiences[4]. in the this implementation it is done by randomly sampling the stored tuples in the Replay Buffer for training the model for each training step.
@@ -27,19 +27,19 @@ Two Neural Network models are used in the DDPG algorithm. An Actor and a Critic 
 
 The Actor Architecture:
 
- The model has 2 fully connected layers
- The first layer takes in the state passes it through 256 nodes with Relu activation
- The second layer take the output from the first layer and passes through 256 nodes and outputs a single real value representing an action chosen from a continuous action space
- Adam optimizer is used with a weight decay of 0.0001.
+ * The model has 2 fully connected layers
+ * The first layer takes in the state passes it through 256 nodes with Relu activation
+ * The second layer take the output from the first layer and passes through 256 nodes and outputs a single real value representing an action chosen from a continuous action space
+ * Adam optimizer is used with a weight decay of 0.0001.
 
 The Critic Architecture:
 
- The model has 4 fully connected layers
- The first layer takes the state and passes through 256 nodes with Relu activation
- Then we take the output from the first layer and concatenate it with the action size
- We then forward this to a second and third layer which passes it through 256 nodes with Relu activation
- Finally the fourth layer passes it through 256 and outputs is a estimated Q-value of the current state and of the action given by the actor
- Adam optimizer is used with a weight decay of 0.0001.
+ * The model has 4 fully connected layers
+ * The first layer takes the state and passes through 256 nodes with Relu activation
+ * Then we take the output from the first layer and concatenate it with the action size
+ * We then forward this to a second and third layer which passes it through 256 nodes with Relu activation
+ * Finally the fourth layer passes it through 256 and outputs is a estimated Q-value of the current state and of the action given by the actor
+ * Adam optimizer is used with a weight decay of 0.0001.
 
 
 #### Implementation
@@ -93,4 +93,4 @@ Probably those can give some smaller improvement of performance. Instead a bette
 
 [7][Taming the Noise in Reinforcement Learning via Soft Updates](https://arxiv.org/pdf/1512.08562.pdf)
 
-[8][Using Keras and Deep Deterministic Policy Gradient to play TORCS] (https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html)
+[8][Using Keras and Deep Deterministic Policy Gradient to play TORCS](https://yanpanlau.github.io/2016/10/11/Torcs-Keras.html)
